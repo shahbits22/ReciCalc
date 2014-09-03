@@ -26,11 +26,11 @@ public class App {
 		// Measure
 
 		measureMap.put(1, "quantity");
-		measureMap.put(2, "cups");
-		measureMap.put(3, "cloves");
+		measureMap.put(2, "cup");
+		measureMap.put(3, "clove");
 		measureMap.put(4, "slice");
 		measureMap.put(5, "ounce");
-		measureMap.put(6, "teaspoons");
+		measureMap.put(6, "teaspoon");
 
 		int choice = 0;
 		boolean flag = true;
@@ -40,7 +40,9 @@ public class App {
 			System.out.println("Press 1 to add ingredient details");
 			System.out.println("Press 2 to add recipe details");
 			System.out.println("press 3 to see recipe cost breakdown");
-			System.out.println("Press 4 to exit the application");
+			System.out.println("press 4 to see the ingredient list");
+			System.out.println("press 5 to see the recipe list");
+			System.out.println("Press 6 to exit the application");
 			Scanner S = new Scanner(System.in);
 			choice = S.nextInt();
 			// System.out.println(choice + "choice");
@@ -62,6 +64,16 @@ public class App {
 			case 3: {
 				// show Recipe Cost Breakdown
 				showRecipeCostBreak();
+				break;
+			}
+			case 4: {
+				// show Ingredient Detail
+				showIngredientDetail();
+				break;
+			}
+			case 5: {
+				// show Recipe Detail
+				showRecipeList();
 				break;
 			}
 
@@ -298,13 +310,32 @@ public class App {
 			}
 		}
 	}
-	
-	public static void showIngredientDetail()
-	{
+
+	public static void showIngredientDetail() {
+
 		Set<Integer> numbers = ingredientList.keySet();
-		for(Integer number: numbers)
-		{
-			
+		for (Integer number : numbers) {
+			System.out.println("1 "
+					+ measureMap.get(ingredientList.get(number).getMeasure())
+					+ " of " + ingredientList.get(number).getIngredientName()
+					+ ": $" + ingredientList.get(number).getPrice());
+		}
+	}
+
+	public static void showRecipeList() {
+		Set<Integer> numbers = recipeList.keySet();
+		for (Integer number : numbers) {
+			System.out.println(recipeList.get(number).getRecipeName());
+			System.out.println("--------------------------------");
+			Set<Ingredient> ingredients = recipeList.get(number)
+					.getIngredientList().keySet();
+			for (Ingredient ingredient : ingredients) {
+				System.out.println(recipeList.get(number).getIngredientList()
+						.get(ingredient)
+						+ " "
+						+ measureMap.get(ingredient.getMeasure())
+						+ " of " + ingredient.getIngredientName());
+			}
 		}
 	}
 }
