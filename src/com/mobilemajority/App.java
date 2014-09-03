@@ -11,8 +11,13 @@ import java.util.Set;
  * Hello world!
  *
  */
+/**
+ * @author shahbits22
+ *
+ */
 public class App {
 
+	// Store Data in collections
 	public static LinkedHashMap<Integer, Ingredient> ingredientList = new LinkedHashMap<Integer, Ingredient>();
 	public static LinkedHashMap<Integer, Recipe> recipeList = new LinkedHashMap<Integer, Recipe>();
 	public static LinkedHashMap<Integer, String> measureMap = new LinkedHashMap<Integer, String>();
@@ -21,7 +26,6 @@ public class App {
 	public static int recipeNumber = 1;
 
 	public static void main(String[] args) {
-		// System.out.println( "Hello World!" );
 
 		// Measure
 
@@ -36,6 +40,8 @@ public class App {
 		boolean flag = true;
 
 		while (flag) {
+
+			// Choice Menu
 			System.out.println("Enter your choice: ");
 			System.out.println("Press 1 to add ingredient details");
 			System.out.println("Press 2 to add recipe details");
@@ -44,8 +50,8 @@ public class App {
 			System.out.println("press 5 to see the recipe list");
 			System.out.println("Press 6 to exit the application");
 			Scanner S = new Scanner(System.in);
-			choice = S.nextInt();
-			// System.out.println(choice + "choice");
+			choice = S.nextInt(); // Enter Choice
+
 			switch (choice) {
 			case 1: {
 				// Add ingredient
@@ -78,14 +84,16 @@ public class App {
 			}
 
 			default: {
+				// Exit from the menu
 				flag = false;
 			}
 			}
 		}
-		// showIngredients();
+
 		System.out.println("Good Bye!!!");
 	}
 
+	// Function to add the ingredient into the system
 	public static void addIngredient() {
 		Ingredient ingredient = new Ingredient();
 		int type = 0;
@@ -107,7 +115,7 @@ public class App {
 			S.nextLine(); // clears the buffer
 
 		}
-		ingredient.setType(type);
+		ingredient.setType(type); //Set ingredient type
 
 		String name = null;
 
@@ -115,7 +123,7 @@ public class App {
 
 		name = S.nextLine();
 
-		ingredient.setIngredientName(name);
+		ingredient.setIngredientName(name);  //Set ingredient name
 		reloop = 1;
 		while (measure < 1 || measure > measureMap.size() || reloop != 0) {
 			reloop = 0;
@@ -135,7 +143,7 @@ public class App {
 			S.nextLine(); // clears the buffer
 
 		}
-		ingredient.setMeasure(measure);
+		ingredient.setMeasure(measure);  //Set ingredient measure
 
 		reloop = 1;
 		double price = 0.00;
@@ -152,20 +160,22 @@ public class App {
 			S.nextLine(); // clears the buffer
 		}
 
-		ingredient.setPrice(price);
+		ingredient.setPrice(price);  //Set ingredient price
 
 		System.out.println("Is an ingredient organic? (y/n)");
-		String isOrganic = S.next();
+		String isOrganic = S.next();	//Whether ingredient is organic or not
 		if (isOrganic.equals("y") || isOrganic.equals("Y")) {
 			ingredient.setOrganic(true);
 		} else {
-			ingredient.setOrganic(false);
+			ingredient.setOrganic(false);  
 		}
 
 		ingredientList.put(ingredientNumber++, ingredient);
 		System.out.println("Ingredient added into the system...");
+		System.out.println("");
 	}
 
+	//Function to list ingredient names
 	public static void showIngredients() {
 		Set<Integer> keys = ingredientList.keySet();
 		for (Integer key : keys) {
@@ -173,7 +183,8 @@ public class App {
 					+ ingredientList.get(key).getIngredientName());
 		}
 	}
-
+	
+	//Function to add recipe into the system
 	public static void addRecipe() {
 		Recipe recipe = new Recipe();
 		LinkedHashMap<Ingredient, Double> recipeIngredientList = new LinkedHashMap<Ingredient, Double>();
@@ -185,7 +196,7 @@ public class App {
 
 		recipeName = S.nextLine();
 
-		recipe.setRecipeName(recipeName);
+		recipe.setRecipeName(recipeName); //Set recipe name
 
 		System.out.println("List of available ingredients");
 		showIngredients();
@@ -231,7 +242,7 @@ public class App {
 				S.nextLine(); // clears the buffer
 			}
 
-			recipeIngredientList.put(ingredientList.get(number), count);
+			recipeIngredientList.put(ingredientList.get(number), count); //Add ingredient to recipeIngredient List
 			System.out.println("Do you want to add more ingredients? (y/n)");
 			String choice = S.next();
 			if (choice.equals("n") || choice.equals("N")) {
@@ -242,9 +253,11 @@ public class App {
 		recipeList.put(recipeNumber++, recipe);
 		calculateRecipeCost(recipe);
 		System.out.println("Recipe added into the system...");
+		System.out.println("");
 
 	}
 
+	//Function to calculate recipe cost
 	public static void calculateRecipeCost(Recipe recipe) {
 		RecipeCostBreakdown rcb = new RecipeCostBreakdown();
 		RecipeCostCalc rc = new RecipeCostCalc(recipe, rcb);
@@ -257,6 +270,7 @@ public class App {
 
 	}
 
+	//Function to show recipe cost breakdown
 	public static void showRecipeCostBreak() {
 		Set<Integer> numbers = recipeList.keySet();
 		for (Integer number : numbers) {
@@ -311,6 +325,7 @@ public class App {
 		}
 	}
 
+	//Function to list ingredient details
 	public static void showIngredientDetail() {
 
 		Set<Integer> numbers = ingredientList.keySet();
@@ -322,6 +337,7 @@ public class App {
 		}
 	}
 
+	//Function to list recipe details
 	public static void showRecipeList() {
 		Set<Integer> numbers = recipeList.keySet();
 		for (Integer number : numbers) {

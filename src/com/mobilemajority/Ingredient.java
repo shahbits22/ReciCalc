@@ -1,5 +1,6 @@
 package com.mobilemajority;
 
+
 public class Ingredient {
 
 	private String ingredientName;
