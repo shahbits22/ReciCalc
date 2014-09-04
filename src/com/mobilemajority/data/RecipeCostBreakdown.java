@@ -1,5 +1,7 @@
-package com.mobilemajority;
+package com.mobilemajority.data;
 
+
+/*This is a POJO class for recipe breakdown*/
 public class RecipeCostBreakdown {
 	
 	private double totalPrice;

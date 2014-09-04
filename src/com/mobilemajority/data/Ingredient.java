@@ -1,6 +1,6 @@
-package com.mobilemajority;
+package com.mobilemajority.data;
 
-
+/*This is a POJO class for Ingredient*/
 public class Ingredient {
 
 	private String ingredientName;

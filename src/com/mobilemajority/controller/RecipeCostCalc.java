@@ -1,7 +1,13 @@
-package com.mobilemajority;
+package com.mobilemajority.controller;
 
 import java.util.Set;
 
+import com.mobilemajority.data.Ingredient;
+import com.mobilemajority.data.Recipe;
+import com.mobilemajority.data.RecipeCostBreakdown;
+
+/*This class is to calculate recipe cost (Total Price, Sales Tax, 
+ * Wellness Discount & Total Cost of Recipe) */
 public class RecipeCostCalc {
 
 	private Recipe recipe;
@@ -24,8 +30,8 @@ public class RecipeCostCalc {
 			totalPrice = totalPrice
 					+ (key.getPrice() * recipe.getIngredientList().get(key));
 		}
-
-		rcb.setTotalPrice(totalPrice);
+		
+		rcb.setTotalPrice((double) Math.round(totalPrice * 100.0) / 100.0);
 	}
 
 	// function to calculate sales tax
@@ -82,8 +88,8 @@ public class RecipeCostCalc {
 	// function to calculate total cost of recipe
 
 	public void calculateTotalCost() {
-		totalCost = totalPrice + salesTax - wellnessDiscount;
-		rcb.setTotalCost(totalCost);
+		totalCost = rcb.getTotalPrice() + rcb.getSalesTax() - rcb.getWellnessDiscount();
+		rcb.setTotalCost((double) Math.round(totalCost * 100) / 100);
 	}
 
 }

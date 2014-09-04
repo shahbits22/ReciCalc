@@ -1,7 +1,8 @@
-package com.mobilemajority;
+package com.mobilemajority.data;
 
 import java.util.LinkedHashMap;
 
+/* This is a POJO class for recipe */
 public class Recipe {
 
 	private String recipeName;
