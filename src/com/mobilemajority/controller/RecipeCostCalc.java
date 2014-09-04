@@ -81,7 +81,7 @@ public class RecipeCostCalc {
 		}
 
 		// round up to nearest cent
-		wellnessDiscount = (double) Math.round(wellnessDiscount * 100) / 100;
+		wellnessDiscount = (double) Math.ceil(wellnessDiscount * 100) / 100; //always rounded up to nearest cent
 		rcb.setWellnessDiscount(wellnessDiscount);
 	}
 
