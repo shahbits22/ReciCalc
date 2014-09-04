@@ -58,7 +58,22 @@ public class App {
 			System.out.println("press 5 to see the recipe list");
 			System.out.println("Press 6 to exit the application");
 			Scanner S = new Scanner(System.in);
-			choice = S.nextInt(); // Enter Choice
+			int reloop =1;
+			while(reloop!=0)
+			{
+				try{
+					reloop =0;
+					choice = S.nextInt(); // Enter Choice
+				}
+				catch(InputMismatchException e)
+				{
+					reloop =1;
+					System.out.println("Enter numeric value");
+				}
+				S.nextLine();
+			}
+			
+			
 
 			switch (choice) {
 			case 1: {
@@ -90,10 +105,13 @@ public class App {
 				showRecipeList();
 				break;
 			}
+			case 6:{
+				flag = false;
+			}
 
 			default: {
 				// Exit from the menu
-				flag = false;
+				System.out.println("Enter any number from the list");
 			}
 			}
 		}
